@@ -1,0 +1,89 @@
+import java.util.Scanner;
+
+public class simpleBank {
+    public static void main(String[] args) {
+        //initializations
+        Scanner sc = new Scanner (System.in);
+        double balance = 3000;
+        
+        System.out.println("Welcome dear client!");
+        System.out.println("Your current account balance is " + balance + "php");
+        System.out.println("");
+        System.out.println("Choose a mode of transaction:");
+        System.out.println("Press '1' for Cash Deposit");
+        System.out.println("Press '2' for Cash Withdrawal");
+        
+        for (;;) {
+            
+            int userChoice = sc.nextInt();
+            
+            if (userChoice == 1) {
+                
+                System.out.println("");
+                System.out.println("Enter amount:");
+                double deposit = sc.nextDouble();
+                
+                if (deposit % 50 == 0) {
+                    balance = deposit + balance;
+                    System.out.println("");
+                    System.out.println("CASH DEPOSIT SUCCESS!");
+                    System.out.println("Your new account balance is " + balance + "php");
+                    break;
+                }
+                
+                else {
+                    System.out.println("");
+                    System.out.println("CASH DEPOSIT FAILED!");
+                    System.out.println("Amount should be divisible by 50.");
+                    break;
+                }
+                
+            }
+            
+            else if (userChoice == 2) {
+                System.out.println("");
+                System.out.println("Enter amount:");
+                double withdrawal = sc.nextDouble();
+                
+                if (withdrawal <= balance && withdrawal % 50 == 0) {
+                    System.out.println("");
+                    balance = balance - withdrawal;
+                    System.out.println("CASH WITHDRAWAL SUCCESS!");
+                    System.out.println("Your new account balance is " + balance + "php");
+                    break;
+                }
+                
+                else if (withdrawal <= balance && withdrawal % 50 != 0) {
+                    System.out.println("");
+                    System.out.println("CASH WITHDRAWAL FAILED!");
+                    System.out.println("Amount should be divisible by 50.");
+                    break;
+                }
+                
+                else if (withdrawal > balance && withdrawal % 50 == 0) {
+                    System.out.println("");
+                    double lack = withdrawal - balance;
+                    System.out.println("CASH WITHDRAWAL FAILED!");
+                    System.out.println("Insufficient funds.");
+                    System.out.println("You are " + lack + "php short.");
+                    break;
+                }
+                
+                else {
+                    System.out.println("");
+                    System.out.println("CASH WITHDRAWAL FAILED!");
+                    System.out.println("Insufficient funds and amount should be divisible by 50.");
+                    break;
+                }
+                
+            }
+            
+            else {
+                System.out.println("");
+                System.out.println("Please enter a valid input.");
+            }
+            
+        }
+
+    }
+}
